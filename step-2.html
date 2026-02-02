@@ -1,6 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- GA Google Analytics @ https://m0n.co/ga -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-15716026-12"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-15716026-12');
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KRP4HCC');</script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BWM37Y1PZM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-BWM37Y1PZM');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dominion Financial - Property Details</title>
@@ -408,6 +435,10 @@
     </style>
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KRP4HCC"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
     <header>
         <a href="index.html" class="logo">
             <img src="dfs logo for website.png" alt="Dominion Financial">
@@ -506,14 +537,7 @@
 
                         <div class="form-group">
                             <label for="creditScore">Estimated Credit Score</label>
-                            <select id="creditScore" name="creditScore" required>
-                                <option value="">Select your range</option>
-                                <option value="740+">740+</option>
-                                <option value="700-739">700-739</option>
-                                <option value="660-699">660-699</option>
-                                <option value="620-659">620-659</option>
-                                <option value="Below 620">Below 620</option>
-                            </select>
+                            <input type="number" id="creditScore" name="creditScore" placeholder="Enter your credit score" min="300" max="850" required>
                         </div>
 
                         <div class="form-group">
@@ -643,6 +667,23 @@
             };
 
             console.log('Complete form submission:', completeFormData);
+
+            // Send data to Zapier webhook
+            const zapierWebhookUrl = 'https://hooks.zapier.com/hooks/catch/8600132/ulkwasq/';
+            
+            fetch(zapierWebhookUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(completeFormData)
+            })
+            .then(response => {
+                console.log('Zapier webhook response:', response);
+            })
+            .catch(error => {
+                console.error('Error sending to Zapier:', error);
+            });
 
             // Show the modal popup
             document.getElementById('thankYouModal').classList.add('active');
