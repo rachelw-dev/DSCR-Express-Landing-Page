@@ -63,11 +63,39 @@
         header {
             background-color: var(--color-bg-card);
             border-bottom: 1px solid var(--color-border-default);
-            padding: 12px 0;
+            padding: 12px 40px 12px 20px;
             display: flex;
-            justify-content: flex-start;
+            justify-content: space-between;
             align-items: center;
-            padding-left: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-phone-btn {
+            display: inline-block;
+            height: var(--input-height);
+            line-height: var(--input-height);
+            background-color: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: var(--input-radius);
+            font-size: var(--text-base);
+            font-weight: var(--font-semibold);
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            text-decoration: none;
+            padding: 0 20px;
+            margin: 0;
+            width: auto;
+        }
+
+        .header-phone-btn:hover {
+            background-color: var(--color-primary-hover);
+        }
+
+        .header-phone-btn:active {
+            transform: translateY(1px);
         }
 
         .logo {
@@ -168,6 +196,41 @@
             box-shadow: 0 0 0 3px var(--input-focus-ring);
         }
 
+        .consent-section {
+            background-color: #f9fafb;
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--input-radius);
+            padding: 16px;
+            margin-top: 24px;
+        }
+
+        .consent-section p {
+            font-size: var(--text-sm);
+            color: var(--color-text-secondary);
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .consent-section a {
+            color: var(--color-primary);
+            text-decoration: underline;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+        }
+
+        .checkbox-label input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
         button {
             width: 100%;
             height: var(--input-height);
@@ -213,7 +276,7 @@
 
         footer {
             background-color: rgba(126, 205, 69, 0.3);
-            color: white;
+            color: #4a4a4a;
             padding: 100px 40px 60px 40px;
             margin-top: 0;
         }
@@ -231,18 +294,17 @@
         footer .logo img {
             max-height: 50px;
             width: auto;
-            filter: brightness(0) invert(1);
         }
 
         footer p {
             font-size: 14px;
             line-height: 1.8;
-            color: rgba(255, 255, 255, 0.9);
+            color: #4a4a4a;
             margin-bottom: 12px;
         }
 
         footer a {
-            color: white;
+            color: #4a4a4a;
             text-decoration: underline;
         }
 
@@ -313,14 +375,20 @@
             .hero-form {
                 max-width: 100%;
             }
+
+            .address-row {
+                display: flex;
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="logo">
-            <img src="https://loan-intake-hub.lovable.app/assets/dominion-logo-Cg3xA8wR.png" alt="Dominion Financial">
-        </div>
+        <a href="index.html" class="logo">
+            <img src="dfs logo for website.png" alt="Dominion Financial">
+        </a>
+        <a href="tel:410-713-9551" class="header-phone-btn">410-713-9551</a>
     </header>
 
     <div class="container">
@@ -345,7 +413,59 @@
 
                                 <div class="form-group">
                                     <label for="state">State</label>
-                                    <input type="text" id="state" name="state" required>
+                                    <select id="state" name="state" required>
+                                        <option value="">Select</option>
+                                        <option value="AL">AL</option>
+                                        <option value="AK">AK</option>
+                                        <option value="AZ">AZ</option>
+                                        <option value="AR">AR</option>
+                                        <option value="CA">CA</option>
+                                        <option value="CO">CO</option>
+                                        <option value="CT">CT</option>
+                                        <option value="DE">DE</option>
+                                        <option value="FL">FL</option>
+                                        <option value="GA">GA</option>
+                                        <option value="HI">HI</option>
+                                        <option value="ID">ID</option>
+                                        <option value="IL">IL</option>
+                                        <option value="IN">IN</option>
+                                        <option value="IA">IA</option>
+                                        <option value="KS">KS</option>
+                                        <option value="KY">KY</option>
+                                        <option value="LA">LA</option>
+                                        <option value="ME">ME</option>
+                                        <option value="MD">MD</option>
+                                        <option value="MA">MA</option>
+                                        <option value="MI">MI</option>
+                                        <option value="MN">MN</option>
+                                        <option value="MS">MS</option>
+                                        <option value="MO">MO</option>
+                                        <option value="MT">MT</option>
+                                        <option value="NE">NE</option>
+                                        <option value="NV">NV</option>
+                                        <option value="NH">NH</option>
+                                        <option value="NJ">NJ</option>
+                                        <option value="NM">NM</option>
+                                        <option value="NY">NY</option>
+                                        <option value="NC">NC</option>
+                                        <option value="ND">ND</option>
+                                        <option value="OH">OH</option>
+                                        <option value="OK">OK</option>
+                                        <option value="OR">OR</option>
+                                        <option value="PA">PA</option>
+                                        <option value="RI">RI</option>
+                                        <option value="SC">SC</option>
+                                        <option value="SD">SD</option>
+                                        <option value="TN">TN</option>
+                                        <option value="TX">TX</option>
+                                        <option value="UT">UT</option>
+                                        <option value="VT">VT</option>
+                                        <option value="VA">VA</option>
+                                        <option value="WA">WA</option>
+                                        <option value="WV">WV</option>
+                                        <option value="WI">WI</option>
+                                        <option value="WY">WY</option>
+                                    </select>
                                 </div>
 
                                 <div class="form-group">
@@ -370,6 +490,38 @@
                                 <option value="620-659">620-659</option>
                                 <option value="Below 620">Below 620</option>
                             </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="hearAboutUs">How did you hear about us?</label>
+                            <select id="hearAboutUs" name="hearAboutUs" required>
+                                <option value="">Select an option</option>
+                                <option value="BiggerPockets">BiggerPockets</option>
+                                <option value="Direct Mail">Direct Mail</option>
+                                <option value="Event">Event</option>
+                                <option value="Facebook">Facebook</option>
+                                <option value="Instagram">Instagram</option>
+                                <option value="LinkedIn">LinkedIn</option>
+                                <option value="Reddit">Reddit</option>
+                                <option value="Referred">Referred</option>
+                                <option value="RIR Podcast">RIR Podcast</option>
+                                <option value="Think Realty">Think Realty</option>
+                                <option value="Web Search">Web Search</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" id="hearAboutUsOtherGroup" style="display: none;">
+                            <label for="hearAboutUsOther">Tell us how you heard about us:</label>
+                            <input type="text" id="hearAboutUsOther" name="hearAboutUsOther" placeholder="Please specify">
+                        </div>
+
+                        <div class="form-group consent-section">
+                            <p><strong>Loan Communications:</strong> By submitting this form, you agree to receive text messages and calls from Dominion Financial related to your loan application and borrower account. Message & data rates may apply. Message frequency varies. Reply HELP for help and STOP to cancel. View <a href="https://dominionfinancialservices.com/terms-of-use/">Terms of Service</a> and <a href="https://dominionfinancialservices.com/privacy-policy/">Privacy Policy</a>.</p>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="loanConsent" name="loanConsent" required>
+                                <span>I agree</span>
+                            </label>
                         </div>
 
                         <button type="submit">Submit</button>
@@ -409,6 +561,13 @@
             phone: sessionStorage.getItem('phone') || ''
         };
 
+        // Retrieve UTM parameters from sessionStorage
+        const utmData = {
+            utm_source: sessionStorage.getItem('utm_source') || '',
+            utm_medium: sessionStorage.getItem('utm_medium') || '',
+            utm_campaign: sessionStorage.getItem('utm_campaign') || ''
+        };
+
         // Global variable to store complete form data
         let completeFormData = {};
 
@@ -422,6 +581,22 @@
             }
         });
 
+        // Show/hide "Other" text field based on dropdown selection
+        const hearAboutUsSelect = document.getElementById('hearAboutUs');
+        const hearAboutUsOtherGroup = document.getElementById('hearAboutUsOtherGroup');
+        const hearAboutUsOtherInput = document.getElementById('hearAboutUsOther');
+
+        hearAboutUsSelect.addEventListener('change', function() {
+            if (this.value === 'Other') {
+                hearAboutUsOtherGroup.style.display = 'block';
+                hearAboutUsOtherInput.required = true;
+            } else {
+                hearAboutUsOtherGroup.style.display = 'none';
+                hearAboutUsOtherInput.required = false;
+                hearAboutUsOtherInput.value = '';
+            }
+        });
+
         function handleSubmit(event) {
             event.preventDefault();
 
@@ -431,13 +606,16 @@
                 state: document.getElementById('state').value,
                 zipcode: document.getElementById('zipcode').value,
                 propertyValue: document.getElementById('propertyValue').value,
-                creditScore: document.getElementById('creditScore').value
+                creditScore: document.getElementById('creditScore').value,
+                hearAboutUs: document.getElementById('hearAboutUs').value,
+                hearAboutUsOther: document.getElementById('hearAboutUsOther').value
             };
 
-            // Combine all form data
+            // Combine all form data including UTM parameters
             completeFormData = {
                 ...step1Data,
-                ...step2Data
+                ...step2Data,
+                ...utmData
             };
 
             console.log('Complete form submission:', completeFormData);
@@ -465,6 +643,13 @@
             params.append('zipcode', completeFormData.zipcode);
             params.append('propertyValue', completeFormData.propertyValue);
             params.append('creditScore', completeFormData.creditScore);
+            params.append('hearAboutUs', completeFormData.hearAboutUs);
+            if (completeFormData.hearAboutUsOther) params.append('hearAboutUsOther', completeFormData.hearAboutUsOther);
+
+            // Add UTM parameters if they exist
+            if (completeFormData.utm_source) params.append('utm_source', completeFormData.utm_source);
+            if (completeFormData.utm_medium) params.append('utm_medium', completeFormData.utm_medium);
+            if (completeFormData.utm_campaign) params.append('utm_campaign', completeFormData.utm_campaign);
 
             // Construct final URL
             const finalUrl = baseUrl + '?' + params.toString();
