@@ -736,12 +736,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             if (completeFormData.utm_medium) params.append('utm_medium', completeFormData.utm_medium);
             if (completeFormData.utm_campaign) params.append('utm_campaign', completeFormData.utm_campaign);
 
-            // Add Lead ID if it was returned from Zapier/Salesforce
-            if (completeFormData.leadId) {
-                params.append('LeadID', completeFormData.leadId);
-                console.log('Adding Lead ID to URL:', completeFormData.leadId);
-            }
-
             // Construct final URL
             const finalUrl = baseUrl + '?' + params.toString();
 
