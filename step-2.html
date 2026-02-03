@@ -671,15 +671,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             // Send data to Zapier webhook
             const zapierWebhookUrl = 'https://hooks.zapier.com/hooks/catch/8600132/ulkwasq/';
             
+            // Build form data for webhook - send each field individually
+            const formData = new FormData();
+            formData.append('firstName', completeFormData.firstName || '');
+            formData.append('lastName', completeFormData.lastName || '');
+            formData.append('email', completeFormData.email || '');
+            formData.append('phone', completeFormData.phone || '');
+            formData.append('streetAddress', completeFormData.streetAddress || '');
+            formData.append('city', completeFormData.city || '');
+            formData.append('state', completeFormData.state || '');
+            formData.append('zipcode', completeFormData.zipcode || '');
+            formData.append('propertyValue', completeFormData.propertyValue || '');
+            formData.append('creditScore', completeFormData.creditScore || '');
+            formData.append('hearAboutUs', completeFormData.hearAboutUs || '');
+            formData.append('hearAboutUsOther', completeFormData.hearAboutUsOther || '');
+            formData.append('utm_source', completeFormData.utm_source || '');
+            formData.append('utm_medium', completeFormData.utm_medium || '');
+            formData.append('utm_campaign', completeFormData.utm_campaign || '');
+
             fetch(zapierWebhookUrl, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(completeFormData)
+                mode: 'no-cors',
+                body: formData
             })
-            .then(response => {
-                console.log('Zapier webhook response:', response);
+            .then(() => {
+                console.log('Zapier webhook sent successfully');
             })
             .catch(error => {
                 console.error('Error sending to Zapier:', error);
