@@ -567,7 +567,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <div class="form-group consent-section">
                             <p><strong>Loan Communications:</strong> By submitting this form, you agree to receive text messages and calls from Dominion Financial related to your loan application and borrower account. Message & data rates may apply. Message frequency varies. Reply HELP for help and STOP to cancel. View <a href="https://dominionfinancialservices.com/terms-of-use/">Terms of Service</a> and <a href="https://dominionfinancialservices.com/privacy-policy/">Privacy Policy</a>.</p>
                             <label class="checkbox-label">
-                                <input type="checkbox" id="loanConsent" name="loanConsent" required>
+                                <input type="checkbox" id="loanConsent" name="loanConsent">
                                 <span>I agree</span>
                             </label>
                         </div>
@@ -656,7 +656,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 propertyValue: document.getElementById('propertyValue').value,
                 creditScore: document.getElementById('creditScore').value,
                 hearAboutUs: document.getElementById('hearAboutUs').value,
-                hearAboutUsOther: document.getElementById('hearAboutUsOther').value
+                hearAboutUsOther: document.getElementById('hearAboutUsOther').value,
+                loanConsent: document.getElementById('loanConsent').checked
             };
 
             // Combine all form data including UTM parameters
@@ -685,6 +686,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             formData.append('creditScore', completeFormData.creditScore || '');
             formData.append('hearAboutUs', completeFormData.hearAboutUs || '');
             formData.append('hearAboutUsOther', completeFormData.hearAboutUsOther || '');
+            formData.append('loanConsent', completeFormData.loanConsent ? 'true' : 'false');
             formData.append('utm_source', completeFormData.utm_source || '');
             formData.append('utm_medium', completeFormData.utm_medium || '');
             formData.append('utm_campaign', completeFormData.utm_campaign || '');
