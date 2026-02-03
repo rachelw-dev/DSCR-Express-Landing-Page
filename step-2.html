@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="icon" type="image/png" href="Web Icon - DFS.png">
     <!-- GA Google Analytics @ https://m0n.co/ga -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-15716026-12"></script>
     <script>
@@ -672,39 +673,56 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             // Send data to Zapier webhook
             const zapierWebhookUrl = 'https://hooks.zapier.com/hooks/catch/8600132/ulkwasq/';
             
-            // Build form data for webhook - send each field individually
-            const formData = new FormData();
-            formData.append('firstName', completeFormData.firstName || '');
-            formData.append('lastName', completeFormData.lastName || '');
-            formData.append('email', completeFormData.email || '');
-            formData.append('phone', completeFormData.phone || '');
-            formData.append('streetAddress', completeFormData.streetAddress || '');
-            formData.append('city', completeFormData.city || '');
-            formData.append('state', completeFormData.state || '');
-            formData.append('zipcode', completeFormData.zipcode || '');
-            formData.append('propertyValue', completeFormData.propertyValue || '');
-            formData.append('creditScore', completeFormData.creditScore || '');
-            formData.append('hearAboutUs', completeFormData.hearAboutUs || '');
-            formData.append('hearAboutUsOther', completeFormData.hearAboutUsOther || '');
-            formData.append('loanConsent', completeFormData.loanConsent ? 'true' : 'false');
-            formData.append('utm_source', completeFormData.utm_source || '');
-            formData.append('utm_medium', completeFormData.utm_medium || '');
-            formData.append('utm_campaign', completeFormData.utm_campaign || '');
+            // Build JSON payload for webhook
+            const webhookData = {
+                firstName: completeFormData.firstName || '',
+                lastName: completeFormData.lastName || '',
+                email: completeFormData.email || '',
+                phone: completeFormData.phone || '',
+                streetAddress: completeFormData.streetAddress || '',
+                city: completeFormData.city || '',
+                state: completeFormData.state || '',
+                zipcode: completeFormData.zipcode || '',
+                propertyValue: completeFormData.propertyValue || '',
+                creditScore: completeFormData.creditScore || '',
+                hearAboutUs: completeFormData.hearAboutUs || '',
+                hearAboutUsOther: completeFormData.hearAboutUsOther || '',
+                loanConsent: completeFormData.loanConsent ? 'true' : 'false',
+                utm_source: completeFormData.utm_source || '',
+                utm_medium: completeFormData.utm_medium || '',
+                utm_campaign: completeFormData.utm_campaign || ''
+            };
 
+            // Show the modal popup immediately
+            document.getElementById('thankYouModal').classList.add('active');
+
+            // Send to Zapier and wait for Lead ID response
             fetch(zapierWebhookUrl, {
                 method: 'POST',
-                mode: 'no-cors',
-                body: formData
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(webhookData)
             })
-            .then(() => {
-                console.log('Zapier webhook sent successfully');
+            .then(response => response.json())
+            .then(data => {
+                console.log('Zapier webhook response:', data);
+                // Store the Lead ID from Zapier's response
+                if (data && data.leadId) {
+                    completeFormData.leadId = data.leadId;
+                    console.log('Lead ID received:', data.leadId);
+                } else if (data && data.LeadId) {
+                    completeFormData.leadId = data.LeadId;
+                    console.log('Lead ID received:', data.LeadId);
+                } else if (data && data.id) {
+                    completeFormData.leadId = data.id;
+                    console.log('Lead ID received:', data.id);
+                }
             })
             .catch(error => {
                 console.error('Error sending to Zapier:', error);
+                // Continue anyway - the form submission shouldn't fail if webhook has issues
             });
-
-            // Show the modal popup
-            document.getElementById('thankYouModal').classList.add('active');
         }
 
         function handleModalYes() {
@@ -733,6 +751,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             if (completeFormData.utm_source) params.append('utm_source', completeFormData.utm_source);
             if (completeFormData.utm_medium) params.append('utm_medium', completeFormData.utm_medium);
             if (completeFormData.utm_campaign) params.append('utm_campaign', completeFormData.utm_campaign);
+
+            // Add Lead ID if it was returned from Zapier/Salesforce
+            if (completeFormData.leadId) {
+                params.append('LeadID', completeFormData.leadId);
+                console.log('Adding Lead ID to URL:', completeFormData.leadId);
+            }
 
             // Construct final URL
             const finalUrl = baseUrl + '?' + params.toString();
